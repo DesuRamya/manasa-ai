@@ -24,8 +24,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
-        val apiKey = localProperties.getProperty("eleven_labs_api_key") ?: ""
-        buildConfigField("String", "ELEVEN_LABS_API_KEY", "\"$apiKey\"")
+        val elevenLabsKey = localProperties.getProperty("eleven_labs_api_key") ?: ""
+        val geminiKey = localProperties.getProperty("gemini_api_key") ?: ""
+        
+        buildConfigField("String", "ELEVEN_LABS_API_KEY", "\"$elevenLabsKey\"")
+        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiKey\"")
     }
 
     buildTypes {
@@ -58,8 +61,11 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)
     
-    // Networking for ElevenLabs
+    // Networking
     implementation(libs.okhttp)
+    
+    // AI - Gemini
+    implementation(libs.generativeai)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
